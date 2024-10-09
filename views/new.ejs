@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Issue Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        select, input, button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .dropdown {
+            position: relative;
+        }
+        .dropdown::after {
+            content: "\25BC";
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .add-photo {
+            display: flex;
+            align-items: center;
+        }
+        .add-photo::after {
+            content: "+";
+            margin-left: 10px;
+            font-size: 20px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>ADD ISSUE</h2>
+        <form>
+            <div class="form-group dropdown">
+                <select>
+                    <option value="" disabled selected>Choose category</option>
+                    <!-- Add more options here -->
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="Description">
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="Add Location">
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="Add Date">
+            </div>
+            <div class="form-group add-photo">
+                <input type="text" placeholder="Add photo">
+            </div>
+            <div class="form-group">
+                <button type="submit">SUBMIT</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
