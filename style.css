@@ -1,0 +1,126 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+:root{
+    --background-color: #F9F2E7;
+    --btn-color: #48358C;
+    --font-color: #463184;
+}
+
+body{
+    background-color: var(--background-color);
+    font-family: "Poppins", serif;
+}
+
+header{
+    background-color: var(--background-color);
+    /* background-color: red; */
+    height: 6rem;
+    width: auto;
+    margin: 10px 20px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+    box-sizing: border-box;
+
+    position: sticky;
+    top: 0px;
+}
+
+.logo-container{
+    height: 100%;
+    width: auto;
+    /* background-color: blue; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-container img{
+    width: 8rem;
+}
+
+.logo-name {
+    font-size: 2.4rem;
+}
+
+.user-page{
+    margin-right: 10px;
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 6px;
+}
+
+.btn{
+    border: none;
+    height: auto;
+    width: auto;
+    border-radius: 10px;
+    padding: 8px 10px;
+    box-sizing: border-box;
+    background-color: var(--btn-color);
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+main{
+    margin: 5rem;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.slogan{
+    max-width: 80vw;
+    margin: auto;
+    text-align: center;
+    font-weight: 700;
+    font-size: 4rem;
+    color: var(--font-color);
+}
+
+.slogan-para{
+    max-width: 60vw;
+    margin: auto;
+    text-align: center;
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: var(--font-color);
+    margin-bottom: 0.6rem;
+}
+
+footer {
+    display: flex;
+    justify-content: space-around;
+    height: 20rem;
+    width: 90%;
+    margin: 5%;
+    position: relative;
+}
+
+.card{
+    width: 40%;
+    /* border: 2px solid black; */
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    padding: 16px;
+}
+
+.card1{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+}
+
+.card2{
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+}
