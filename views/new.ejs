@@ -35,18 +35,6 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
-        .dropdown {
-            position: relative;
-        }
-        .add-photo {
-            display: flex;
-            align-items: center;
-        }
-        .add-photo::after {
-            content: "+";
-            margin-left: 10px;
-            font-size: 20px;
-        }
         button {
             background-color: #007bff;
             color: white;
@@ -62,26 +50,27 @@
 <body>
     <div class="form-container">
         <h2>ADD ISSUE</h2>
-        <form action="/new" method="post">
-            <div class="form-group dropdown">
-                <select>
-                    <option value="Potholes "> Potholes</option>
-                    <option value="streetLight" > Faulty Street Light</option>
-                    <option value="Garbage"> Garbage Accumilation</option>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <select name="issuetype" required>
+                    <option value="">Select Issue Type</option>
+                    <option value="Potholes">Potholes</option>
+                    <option value="Faulty Street Light">Faulty Street Light</option>
+                    <option value="Garbage">Garbage Accumulation</option>
                     <!-- Add more options here -->
                 </select>
             </div>
             <div class="form-group">
-                <input type="text" placeholder="Description" >
+                <input type="text" placeholder="Description" name="Description" required>
             </div>
             <div class="form-group">
-                <input type="text" placeholder="Add Location">
+                <input type="text" placeholder="Add Location" name="location" required>
             </div>
             <div class="form-group">
-                <input type="text" placeholder="Add Date">
+                <input type="date" name="date" required>
             </div>
-            <div class="form-group add-photo">
-                <input type="text" placeholder="Add photo">
+            <div class="form-group">
+                <input type="file" name="image">
             </div>
             <div class="form-group">
                 <button type="submit">SUBMIT</button>

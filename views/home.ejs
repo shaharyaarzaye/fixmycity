@@ -1,85 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="home.css">
+    <title>FixMyCity - Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        .logo-container img {
+            width: 50px;
+            height: 50px;
+            margin-right: 1rem;
+        }
+        .logo-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .user-actions {
+            display: flex;
+            align-items: center;
+        }
+        .user-actions span {
+            margin-right: 1rem;
+        }
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        main {
+            padding: 2rem;
+        }
+        .main-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .head-title {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .issues-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .issue-item {
+            background-color: #fff;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .issue-item img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+        .issue-info {
+            margin-bottom: 0.5rem;
+        }
+        .vote-section {
+            display: flex;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        .vote-btn {
+            background-color: #f0f0f0;
+            border: none;
+            padding: 0.5rem;
+            margin-right: 0.5rem;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .vote-count {
+            font-weight: bold;
+            margin: 0 0.5rem;
+        }
+    </style>
 </head>
-
 <body>
     <header>
         <div class="logo-container">
-            <img src="logo.jpg" alt="">
+            <img src="/assets/logo.jpeg" alt="FixMyCity Logo">
             <div class="logo-name">FixMyCity</div>
         </div>
         <div class="user-actions">
-            <span>User : <%= username %> </span>
-        <a class="btn" href="/logout">Logout</a>
+            <span>User: <%= user ? user.username : 'Guest' %></span>
+            <a class="btn" href="/logout">Logout</a>
         </div>
-        
     </header>
 
     <main>
         <div class="main-nav">
             <div class="head-title">Recent Issues</div>
-
-            <a class="add-issue btn"  href = "/new">Add Issue</a>
+            <a class="btn" href="/new">Add Issue</a>
         </div>
-        <div class="cards">
-            <div class="card">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUwDrpQBHzs13iPQou-FL9e-455ogQzBYgtg&s"
-                    alt="">
-                <div class="information">
-                    <div class="user-name">FlameKaiser</div>
-                    <div class="category"><b>Category:</b> Potholes</div>
-                    <div class="description"><b>Description: </b>Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Doloremque officia officiis ipsam tempora tenetur similique nam minus error maxime, ipsum
-                        illo soluta harum quos!</div>
-                    <div class="location"><b>Location: </b>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Quae,
-                        laboriosam?</div>
-                    <div class="date"><b>Date: </b>23/04/2024</div>
-                    <div class="vote-section">
-                        <button class="upvote-btn" onclick="vote('up', this)">👍 Upvote</button>
-                        <span class="vote-count">0</span>
-                        <button class="downvote-btn" onclick="vote('down', this)">👎 Downvote</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <ul class="issues-list">
+            <% if (issues && issues.length > 0) { %>
+                <% issues.forEach(issue => { %>
+                    <li class="issue-item" data-issue-id="<%= issue._id %>">
+                        <% if (issue.image) { %>
+                            <img src="/uploads/<%= issue.image %>" alt="Issue Image">
+                        <% } %>
+                        <div class="issue-info"><strong>Reported by:</strong> <%= issue.user ? issue.user.username : 'Anonymous' %></div>
+                        <div class="issue-info"><strong>Category:</strong> <%= issue.issuetype %></div>
+                        <div class="issue-info"><strong>Description:</strong> <%= issue.Description %></div>
+                        <div class="issue-info"><strong>Location:</strong> <%= issue.location %></div>
+                        <div class="issue-info"><strong>Date:</strong> <%= new Date(issue.Date).toLocaleDateString() %></div>
+                        <div class="vote-section">
+                            <button class="vote-btn upvote-btn" onclick="vote('up', this)">👍 Upvote</button>
+                            <span class="vote-count"><%= issue.votes || 0 %></span>
+                            <button class="vote-btn downvote-btn" onclick="vote('down', this)">👎 Downvote</button>
+                        </div>
+                    </li>
+                <% }) %>
+            <% } else { %>
+                <li>No issues found. Be the first to report an issue!</li>
+            <% } %>
+        </ul>
     </main>
 
     <script>
         function vote(type, element) {
-            const voteSection = element.parentNode;
-            const voteCountElement = voteSection.querySelector(".vote-count");
+            const issueItem = element.closest(".issue-item");
+            const issueId = issueItem.dataset.issueId;
+            const voteCountElement = issueItem.querySelector(".vote-count");
             let voteCount = parseInt(voteCountElement.textContent);
 
-            // Check if the user has already voted
-            const card = voteSection.closest(".card");
-            let voteStatus = card.getAttribute("data-vote-status");
-
-            if (!voteStatus) {
-                // User hasn't voted yet
-                if (type === "up") {
-                    voteCount++;
-                    card.setAttribute("data-vote-status", "upvoted");
-                } else if (type === "down") {
-                    voteCount--;
-                    card.setAttribute("data-vote-status", "downvoted");
+            fetch(`/vote/${issueId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ type }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    voteCountElement.textContent = data.newVoteCount;
+                } else {
+                    alert(data.message);
                 }
-
-                voteCountElement.textContent = voteCount;
-            } else {
-                // User has already voted, show a message or prevent further voting
-                alert("You've already voted on this issue.");
-            }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while voting.');
+            });
         }
-
     </script>
 </body>
-
 </html>

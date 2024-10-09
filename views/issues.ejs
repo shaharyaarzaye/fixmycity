@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issues</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .issue {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Issues</h1>
+    <% issues.forEach(issue => { %>
+        <div class="issue">
+            <h3><%= issue.issuetype %></h3>
+            <p><strong>Description:</strong> <%= issue.description %></p>
+            <p><strong>Location:</strong> <%= issue.location %></p>
+            <p><strong>Date:</strong> <%= issue.date.toDateString() %></p>
+            <% if (issue.image) { %>
+                <img src="data:image/jpeg;base64,<%= issue.image %>" alt="Issue Image" style="max-width: 100%;"/>
+            <% } %>
+        </div>
+    <% }); %>
+</body>
+</html>
