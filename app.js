@@ -239,7 +239,8 @@ app.post('/login', async (req, res) => {
 
     try {
         // Find the user by email
-        const user = await User.findOne({ email }); // Corrected variable name
+        const user = await User.findOne({ email }); // Corrected variable name 
+        const username = await User.findOne({ username }); // Corrected variable name 
         
         // Check if user exists
         if (!user) {
@@ -255,7 +256,7 @@ app.post('/login', async (req, res) => {
         // Successful login
         console.log('User exists');
         // return res.status(200).json({ message: 'Login successful', user });
-        res.render('home')
+        res.render('home' , {username})
     } catch (error) {
         console.error('Error during login:', error);
         return res.status(500).json({ message: 'Server error' });
@@ -305,6 +306,12 @@ app.get('/new', (req, res) => {
     res.render('new');
 });
 
+app.post('/new' , (req , res) => {
+    
+})
+app.get('/logout' , (req , res) => {
+    res.render('landing')
+})
 // Start the server
 app.listen(3000, () => {
     console.log("Listening on port 3000");

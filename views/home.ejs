@@ -1,11 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="home.css">
 </head>
+
 <body>
-    <a href="/new">add issue</a>
+    <header>
+        <div class="logo-container">
+            <img src="logo.jpg" alt="">
+            <div class="logo-name">FixMyCity</div>
+        </div>
+        <div class="user-actions">
+            <span>User : <%= username %> </span>
+        <a class="btn" href="/logout">Logout</a>
+        </div>
+        
+    </header>
+
+    <main>
+        <div class="main-nav">
+            <div class="head-title">Recent Issues</div>
+
+            <a class="add-issue btn"  href = "/new">Add Issue</a>
+        </div>
+        <div class="cards">
+            <div class="card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUwDrpQBHzs13iPQou-FL9e-455ogQzBYgtg&s"
+                    alt="">
+                <div class="information">
+                    <div class="user-name">FlameKaiser</div>
+                    <div class="category"><b>Category:</b> Potholes</div>
+                    <div class="description"><b>Description: </b>Lorem ipsum, dolor sit amet consectetur adipisicing
+                        elit. Doloremque officia officiis ipsam tempora tenetur similique nam minus error maxime, ipsum
+                        illo soluta harum quos!</div>
+                    <div class="location"><b>Location: </b>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Quae,
+                        laboriosam?</div>
+                    <div class="date"><b>Date: </b>23/04/2024</div>
+                    <div class="vote-section">
+                        <button class="upvote-btn" onclick="vote('up', this)">👍 Upvote</button>
+                        <span class="vote-count">0</span>
+                        <button class="downvote-btn" onclick="vote('down', this)">👎 Downvote</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        function vote(type, element) {
+            const voteSection = element.parentNode;
+            const voteCountElement = voteSection.querySelector(".vote-count");
+            let voteCount = parseInt(voteCountElement.textContent);
+
+            // Check if the user has already voted
+            const card = voteSection.closest(".card");
+            let voteStatus = card.getAttribute("data-vote-status");
+
+            if (!voteStatus) {
+                // User hasn't voted yet
+                if (type === "up") {
+                    voteCount++;
+                    card.setAttribute("data-vote-status", "upvoted");
+                } else if (type === "down") {
+                    voteCount--;
+                    card.setAttribute("data-vote-status", "downvoted");
+                }
+
+                voteCountElement.textContent = voteCount;
+            } else {
+                // User has already voted, show a message or prevent further voting
+                alert("You've already voted on this issue.");
+            }
+        }
+
+    </script>
 </body>
+
 </html>

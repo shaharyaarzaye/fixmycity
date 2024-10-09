@@ -38,13 +38,6 @@
         .dropdown {
             position: relative;
         }
-        .dropdown::after {
-            content: "\25BC";
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
         .add-photo {
             display: flex;
             align-items: center;
@@ -69,15 +62,17 @@
 <body>
     <div class="form-container">
         <h2>ADD ISSUE</h2>
-        <form>
+        <form action="/new" method="post">
             <div class="form-group dropdown">
                 <select>
-                    <option value="" disabled selected>Choose category</option>
+                    <option value="Potholes "> Potholes</option>
+                    <option value="streetLight" > Faulty Street Light</option>
+                    <option value="Garbage"> Garbage Accumilation</option>
                     <!-- Add more options here -->
                 </select>
             </div>
             <div class="form-group">
-                <input type="text" placeholder="Description">
+                <input type="text" placeholder="Description" >
             </div>
             <div class="form-group">
                 <input type="text" placeholder="Add Location">
