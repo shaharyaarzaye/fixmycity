@@ -124,3 +124,8 @@ footer {
     bottom: 0%;
     right: 0%;
 }
+
+.get-started-btn {
+    font-size: 2rem;
+    font-weight: 600;
+}
