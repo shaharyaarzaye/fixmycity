@@ -4,7 +4,7 @@ This repository  is made to solve the problems faced by Mumbaikars  such as garb
 
 # Upcoming new features 
 
-- Pepole can verify athe issue by upvoting and downvoting and also can update the status of issue
+- Pepole can verify the issue by upvoting and downvoting and also can update the status of issue
 - People can comment  on issue and show thier consern about how it is affecting their life
 - we would add the feature to upload the video with the issue
 
